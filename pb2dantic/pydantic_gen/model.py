@@ -1,7 +1,6 @@
 from google.protobuf.descriptor import Descriptor, EnumDescriptor
 
-from .str_utils import snake_case
-from .field import field_type_definition
+from .field import field_definition
 
 DEFAULT_IDENT = " " * 4
 
@@ -14,7 +13,7 @@ def pydantic_model_message(md: Descriptor, ident: str = DEFAULT_IDENT):
     result = class_name_message(md)
     result += "\n"
     for field_name, fd in md.fields_by_name.items():
-        result += f"{ident}{snake_case(field_name)}: {field_type_definition(fd)}\n"
+        result += f"{ident}{field_definition(field_name, fd)}\n"
     result += "\n"
     result += f"{ident}class Config:"
     result += "\n"

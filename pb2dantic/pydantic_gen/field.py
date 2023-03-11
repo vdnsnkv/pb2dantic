@@ -1,6 +1,6 @@
 from google.protobuf.descriptor import FieldDescriptor
 
-from .str_utils import is_camel_case
+from .str_utils import is_camel_case, snake_case
 
 # https://developers.google.com/protocol-buffers/docs/proto3#scalar
 SCALAR_TYPE_MAPPING = {
@@ -119,5 +119,7 @@ def _field_type_description(fd: FieldDescriptor):
     return default_value
 
 
-def field_type_definition(fd: FieldDescriptor):
-    return f"{_field_type(fd)} = {_field_type_description(fd)}"
+def field_definition(field_name: str, fd: FieldDescriptor):
+    return (
+        f"{snake_case(field_name)}: {_field_type(fd)} = {_field_type_description(fd)}"
+    )
