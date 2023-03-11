@@ -37,6 +37,7 @@ SCALAR_TYPE_DEFAULT_VALUES = {
     FieldDescriptor.TYPE_SINT32: 0,
     FieldDescriptor.TYPE_SINT64: 0,
 }
+REPEATED_FIELD_DEFAULT_VALUE = "[]"
 
 # https://developers.google.com/protocol-buffers/docs/reference/google.protobuf
 WELL_KNOWN_TYPES_MAPPING = {
@@ -67,18 +68,20 @@ def _pydantic_field_element_type(fd: FieldDescriptor):
 
 
 def _pydantic_field_default_value(fd: FieldDescriptor):
+    if _has_label_repeated(fd):
+        return REPEATED_FIELD_DEFAULT_VALUE
+
     if _is_scalar_type(fd):
         return repr(SCALAR_TYPE_DEFAULT_VALUES[fd.type])
 
-    elif fd.type == FieldDescriptor.TYPE_MESSAGE:
+    if fd.type == FieldDescriptor.TYPE_MESSAGE:
         field_type = fd.message_type.name
         return WELL_KNOWN_TYPES_DEFAULT_VALUES.get(field_type, f"{field_type}()")
 
-    elif fd.type == FieldDescriptor.TYPE_ENUM:
+    if fd.type == FieldDescriptor.TYPE_ENUM:
         return f"{fd.enum_type.name}(0)"
 
-    else:
-        raise ValueError(f"No default value for {fd}")
+    raise ValueError(f"No default value for {fd}")
 
 
 def _has_label_optional(fd: FieldDescriptor):
@@ -98,10 +101,7 @@ def _field_alias(fd: FieldDescriptor):
 
 
 def _does_not_need_field_function(fd: FieldDescriptor):
-    return (
-            (_is_scalar_type(fd) or _has_label_repeated(fd))
-            and not _needs_alias(fd)
-    )
+    return (_is_scalar_type(fd) or _has_label_repeated(fd)) and not _needs_alias(fd)
 
 
 def _field_type_left_part(fd: FieldDescriptor):
@@ -114,15 +114,10 @@ def _field_type_left_part(fd: FieldDescriptor):
 
 
 def _field_type_right_part(fd: FieldDescriptor):
-    if _does_not_need_field_function(fd):
-        if _has_label_repeated(fd):
-            return "[]"
-
-        return _pydantic_field_default_value(fd)
-
     default_value = _pydantic_field_default_value(fd)
-    if _has_label_repeated(fd):
-        default_value = "[]"
+
+    if _does_not_need_field_function(fd):
+        return default_value
 
     if _needs_alias(fd):
         return f'Field({default_value}, alias="{_field_alias(fd)}")'
