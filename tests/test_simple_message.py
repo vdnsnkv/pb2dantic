@@ -1,6 +1,8 @@
 from .test_output import SimpleTypesMessage
 
-from tests.test_utils import assert_messages_equal, test_pb2 as pb2
+import test_pb2 as pb2
+
+from tests.test_utils import assert_messages_equal
 
 SERIALIZED_MESSAGE_EMPTY = b""
 SERIALIZED_MESSAGE_WITH_DATA = b"\t\x00\x00\x00\x00\x00\x00\xf0?\x15\x00\x00\x00@\x18\x03 \x04(\x051\x06\x00\x00\x00\x00\x00\x00\x00=\x07\x00\x00\x00@\x01J\x0bTEST_STRING"
