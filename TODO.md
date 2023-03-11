@@ -11,25 +11,29 @@ Pydantic models generation from pb2
   - [ ] OneOf
   - [ ] Any
   - [x] Google Timestamp
-  - [ ] Other Well-known types
-  - [ ] Imports in proto files
   - [x] Renaming camel case fields to snake case in models
   - [x] Field types have the same defaults as pb2 messages
   - [ ] Resolve cases when field names clash with language keywords
+  - [ ] Other Well-known types
+    - [ ] Duration
+    - [ ] Empty
+  - [ ] Imports in proto files
   
 Protobuf base model class
-  - [x] Easy model instance creation from pb2 message
+  - [x] One-step model instance creation from pb2 message
     - (without any additional data transformations)
-  - [x] Easy pb2 message creation from model 
+  - [x] One-step pb2 message creation from model 
   - [x] Serialization
     - [x] Don't encode zero values for nested types
     - [x] datetime -> Timestamp serialization
-    - [ ] Other Well-known types
     - [ ] Maps
     - [ ] Any
+    - [ ] OneOf
+    - [ ] Other Well-known types
   - [x] Deserialization
     - [x] Timestamp -> datetime deserialization
     - [ ] bytes field deserialization
-    - [ ] Other Well-known types
     - [ ] Maps
     - [ ] Any
+    - [ ] OneOf
+    - [ ] Other Well-known types

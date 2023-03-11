@@ -23,14 +23,14 @@ class SimpleTypesMessage(ProtoModel):
     field_fixed64: int = 0
     field_fixed32: int = 0
     field_bool: bool = False
-    field_string: str = ''
+    field_string: str = ""
 
     class Config:
         pb2_schema = pb2.SimpleTypesMessage
 
 
 class NestedMessage(ProtoModel):
-    key: str = ''
+    key: str = ""
     value: float = 0.0
 
     class Config:
@@ -38,7 +38,7 @@ class NestedMessage(ProtoModel):
 
 
 class ComplexTypesMessage(ProtoModel):
-    field_string: str = Field('', alias="fieldString")
+    field_string: str = Field("", alias="fieldString")
     optional_int32: int = 0
     repeated_float: t.List[float] = []
     nested: NestedMessage = NestedMessage()

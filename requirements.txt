@@ -1,0 +1,5 @@
+pydantic>=1.9
+grpcio>=1.47
+grpcio-tools>=1.47
+pytest>=7.2.0
+black>=22.10.0

@@ -44,8 +44,8 @@ from pb2dantic import ProtoModel
 
 
 class MyMessage(ProtoModel):
-    key: t.Optional[str]
-    value: t.Optional[float]
+    key:   str = ''
+    value: float = 0.0
 
     class Config:
         pb2_schema = pb2.MyMessage
