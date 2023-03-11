@@ -37,7 +37,7 @@ SCALAR_TYPE_DEFAULT_VALUES = {
     FieldDescriptor.TYPE_SINT32: 0,
     FieldDescriptor.TYPE_SINT64: 0,
 }
-REPEATED_FIELD_DEFAULT_VALUE = "[]"
+REPEATED_FIELD_DEFAULT_VALUE = []
 
 # https://developers.google.com/protocol-buffers/docs/reference/google.protobuf
 WELL_KNOWN_TYPES_MAPPING = {
@@ -69,23 +69,20 @@ def _pydantic_field_element_type(fd: FieldDescriptor):
 
 def _pydantic_field_default_value(fd: FieldDescriptor):
     if _has_label_repeated(fd):
-        return REPEATED_FIELD_DEFAULT_VALUE
+        return repr(REPEATED_FIELD_DEFAULT_VALUE)
 
-    if _is_scalar_type(fd):
+    elif _is_scalar_type(fd):
         return repr(SCALAR_TYPE_DEFAULT_VALUES[fd.type])
 
-    if fd.type == FieldDescriptor.TYPE_MESSAGE:
+    elif fd.type == FieldDescriptor.TYPE_MESSAGE:
         field_type = fd.message_type.name
         return WELL_KNOWN_TYPES_DEFAULT_VALUES.get(field_type, f"{field_type}()")
 
-    if fd.type == FieldDescriptor.TYPE_ENUM:
+    elif fd.type == FieldDescriptor.TYPE_ENUM:
         return f"{fd.enum_type.name}(0)"
 
-    raise ValueError(f"No default value for {fd}")
-
-
-def _has_label_optional(fd: FieldDescriptor):
-    return fd.label == FieldDescriptor.LABEL_OPTIONAL
+    else:
+        raise ValueError(f"No default value for {fd}")
 
 
 def _has_label_repeated(fd: FieldDescriptor):
@@ -100,34 +97,27 @@ def _field_alias(fd: FieldDescriptor):
     return fd.name
 
 
-def _does_not_need_field_function(fd: FieldDescriptor):
-    return (_is_scalar_type(fd) or _has_label_repeated(fd)) and not _needs_alias(fd)
+def _needs_field_function(fd: FieldDescriptor):
+    return _needs_alias(fd)
 
 
-def _field_type_left_part(fd: FieldDescriptor):
-    field_type_left_part = _pydantic_field_element_type(fd)
+def _field_type(fd: FieldDescriptor):
+    element_type = _pydantic_field_element_type(fd)
 
     if _has_label_repeated(fd):
-        field_type_left_part = f"t.List[{field_type_left_part}]"
+        return f"t.List[{element_type}]"
 
-    return field_type_left_part
+    return element_type
 
 
-def _field_type_right_part(fd: FieldDescriptor):
+def _field_type_description(fd: FieldDescriptor):
     default_value = _pydantic_field_default_value(fd)
 
-    if _does_not_need_field_function(fd):
-        return default_value
-
-    if _needs_alias(fd):
+    if _needs_field_function(fd):
         return f'Field({default_value}, alias="{_field_alias(fd)}")'
 
     return default_value
 
 
 def field_type_definition(fd: FieldDescriptor):
-    left_part = _field_type_left_part(fd)
-
-    right_part = _field_type_right_part(fd)
-
-    return f"{left_part} = {right_part}"
+    return f"{_field_type(fd)} = {_field_type_description(fd)}"
