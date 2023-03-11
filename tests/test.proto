@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package python_proto_tools.tests;
+
+import "google/protobuf/timestamp.proto";
+
+message SimpleTypesMessage {
+  double field_double = 1;
+  float field_float = 2;
+  int64 field_int64 = 3;
+  uint64 field_uint64 = 4;
+  int32 field_int32 = 5;
+  fixed64 field_fixed64 = 6;
+  fixed32 field_fixed32 = 7;
+  bool field_bool = 8;
+  string field_string = 9;
+}
+
+message NestedMessage {
+  string key = 1;
+  float value = 2;
+}
+
+enum ExampleEnum {
+  FOO = 0;
+  BAR = 1;
+  BUZZ = 2;
+}
+
+message ComplexTypesMessage {
+  string fieldString = 1;
+  optional int32 optional_int32 = 2;
+  repeated float repeated_float = 3;
+  NestedMessage nested = 4;
+  repeated NestedMessage repeated_nested = 5;
+  optional NestedMessage optionalNested = 6;
+  ExampleEnum fieldEnum = 7;
+  google.protobuf.Timestamp ts = 8;
+}
