@@ -10,11 +10,12 @@ MODULE_IMPORTS = [
     "from pydantic import Field",
     "",
     "from pb2dantic import ProtoModel",
+    "",
 ]
 
 
 def pydantic_module(pb2_file_descriptor: FileDescriptor, pb2_module_file_name: str):
-    pb2_module_import = f"from . import {pb2_module_file_name.replace('.py', '')} as pb2"
+    pb2_module_import = f"import {pb2_module_file_name.replace('.py', '')} as pb2"
     imports = "\n".join([*MODULE_IMPORTS, pb2_module_import])
 
     enum_definitions = []

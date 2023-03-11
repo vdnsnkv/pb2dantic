@@ -5,7 +5,8 @@ from datetime import datetime
 from pydantic import Field
 
 from pb2dantic import ProtoModel
-from tests import test_pb2 as pb2
+
+import test_pb2 as pb2
 
 
 class ExampleEnum(enum.IntEnum):
