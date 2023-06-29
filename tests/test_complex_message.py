@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 import pytest
 from google.protobuf.timestamp_pb2 import Timestamp
 
-import test_pb2 as pb2
+import tests.test_pb2 as pb2
 
 from tests.test_output import ComplexTypesMessage, NestedMessage, ExampleEnum
 from tests.test_utils import assert_messages_equal

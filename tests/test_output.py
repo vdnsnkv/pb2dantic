@@ -6,7 +6,7 @@ from pydantic import Field
 
 from pb2dantic import ProtoModel
 
-import test_pb2 as pb2
+import tests.test_pb2 as pb2
 
 
 class ExampleEnum(enum.IntEnum):
@@ -25,6 +25,7 @@ class SimpleTypesMessage(ProtoModel):
     field_fixed32: int = 0
     field_bool: bool = False
     field_string: str = ""
+    field_bytes: bytes = b""
 
     class Config:
         pb2_schema = pb2.SimpleTypesMessage

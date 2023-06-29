@@ -1,11 +1,11 @@
 from .test_output import SimpleTypesMessage
 
-import test_pb2 as pb2
+import tests.test_pb2 as pb2
 
 from tests.test_utils import assert_messages_equal
 
 SERIALIZED_MESSAGE_EMPTY = b""
-SERIALIZED_MESSAGE_WITH_DATA = b"\t\x00\x00\x00\x00\x00\x00\xf0?\x15\x00\x00\x00@\x18\x03 \x04(\x051\x06\x00\x00\x00\x00\x00\x00\x00=\x07\x00\x00\x00@\x01J\x0bTEST_STRING"
+SERIALIZED_MESSAGE_WITH_DATA = b"\t\x00\x00\x00\x00\x00\x00\xf0?\x15\x00\x00\x00@\x18\x03 \x04(\x051\x06\x00\x00\x00\x00\x00\x00\x00=\x07\x00\x00\x00@\x01J\x0bTEST_STRINGR\nTEST_BYTES"
 
 
 def test_create_empty_model():
@@ -20,6 +20,7 @@ def test_create_empty_model():
     assert pydantic_model.field_fixed32 == 0
     assert pydantic_model.field_bool is False
     assert pydantic_model.field_string == ""
+    assert pydantic_model.field_bytes == b""
 
 
 def test_empty_model_pb2():
@@ -48,6 +49,7 @@ def test_empty_model_deserialize():
     assert pydantic_model.field_fixed32 == 0
     assert pydantic_model.field_bool is False
     assert pydantic_model.field_string == ""
+    assert pydantic_model.field_bytes == b""
 
 
 DATA = {
@@ -60,6 +62,7 @@ DATA = {
     "field_fixed32": 7,
     "field_bool": True,
     "field_string": "TEST_STRING",
+    "field_bytes": b"TEST_BYTES",
 }
 
 
@@ -75,6 +78,7 @@ def test_create_model():
     assert pydantic_model.field_fixed32 == 7
     assert pydantic_model.field_bool is True
     assert pydantic_model.field_string == "TEST_STRING"
+    assert pydantic_model.field_bytes == b"TEST_BYTES"
 
 
 def test_model_pb2():
@@ -97,3 +101,4 @@ def test_model_deserialize():
     assert pydantic_model.field_fixed32 == 7
     assert pydantic_model.field_bool is True
     assert pydantic_model.field_string == "TEST_STRING"
+    assert pydantic_model.field_bytes == b"TEST_BYTES"

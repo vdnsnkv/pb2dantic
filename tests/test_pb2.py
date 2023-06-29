@@ -14,19 +14,19 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ntest.proto\x12\x18python_proto_tools.tests\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd7\x01\n\x12SimpleTypesMessage\x12\x14\n\x0c\x66ield_double\x18\x01 \x01(\x01\x12\x13\n\x0b\x66ield_float\x18\x02 \x01(\x02\x12\x13\n\x0b\x66ield_int64\x18\x03 \x01(\x03\x12\x14\n\x0c\x66ield_uint64\x18\x04 \x01(\x04\x12\x13\n\x0b\x66ield_int32\x18\x05 \x01(\x05\x12\x15\n\rfield_fixed64\x18\x06 \x01(\x06\x12\x15\n\rfield_fixed32\x18\x07 \x01(\x07\x12\x12\n\nfield_bool\x18\x08 \x01(\x08\x12\x14\n\x0c\x66ield_string\x18\t \x01(\t\"+\n\rNestedMessage\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02\"\xa8\x03\n\x13\x43omplexTypesMessage\x12\x13\n\x0b\x66ieldString\x18\x01 \x01(\t\x12\x1b\n\x0eoptional_int32\x18\x02 \x01(\x05H\x00\x88\x01\x01\x12\x16\n\x0erepeated_float\x18\x03 \x03(\x02\x12\x37\n\x06nested\x18\x04 \x01(\x0b\x32\'.python_proto_tools.tests.NestedMessage\x12@\n\x0frepeated_nested\x18\x05 \x03(\x0b\x32\'.python_proto_tools.tests.NestedMessage\x12\x44\n\x0eoptionalNested\x18\x06 \x01(\x0b\x32\'.python_proto_tools.tests.NestedMessageH\x01\x88\x01\x01\x12\x38\n\tfieldEnum\x18\x07 \x01(\x0e\x32%.python_proto_tools.tests.ExampleEnum\x12&\n\x02ts\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x11\n\x0f_optional_int32B\x11\n\x0f_optionalNested*)\n\x0b\x45xampleEnum\x12\x07\n\x03\x46OO\x10\x00\x12\x07\n\x03\x42\x41R\x10\x01\x12\x08\n\x04\x42UZZ\x10\x02\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ntest.proto\x12\x18python_proto_tools.tests\x1a\x1fgoogle/protobuf/timestamp.proto\"\xec\x01\n\x12SimpleTypesMessage\x12\x14\n\x0c\x66ield_double\x18\x01 \x01(\x01\x12\x13\n\x0b\x66ield_float\x18\x02 \x01(\x02\x12\x13\n\x0b\x66ield_int64\x18\x03 \x01(\x03\x12\x14\n\x0c\x66ield_uint64\x18\x04 \x01(\x04\x12\x13\n\x0b\x66ield_int32\x18\x05 \x01(\x05\x12\x15\n\rfield_fixed64\x18\x06 \x01(\x06\x12\x15\n\rfield_fixed32\x18\x07 \x01(\x07\x12\x12\n\nfield_bool\x18\x08 \x01(\x08\x12\x14\n\x0c\x66ield_string\x18\t \x01(\t\x12\x13\n\x0b\x66ield_bytes\x18\n \x01(\x0c\"+\n\rNestedMessage\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x02\"\xa8\x03\n\x13\x43omplexTypesMessage\x12\x13\n\x0b\x66ieldString\x18\x01 \x01(\t\x12\x1b\n\x0eoptional_int32\x18\x02 \x01(\x05H\x00\x88\x01\x01\x12\x16\n\x0erepeated_float\x18\x03 \x03(\x02\x12\x37\n\x06nested\x18\x04 \x01(\x0b\x32\'.python_proto_tools.tests.NestedMessage\x12@\n\x0frepeated_nested\x18\x05 \x03(\x0b\x32\'.python_proto_tools.tests.NestedMessage\x12\x44\n\x0eoptionalNested\x18\x06 \x01(\x0b\x32\'.python_proto_tools.tests.NestedMessageH\x01\x88\x01\x01\x12\x38\n\tfieldEnum\x18\x07 \x01(\x0e\x32%.python_proto_tools.tests.ExampleEnum\x12&\n\x02ts\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x11\n\x0f_optional_int32B\x11\n\x0f_optionalNested*)\n\x0b\x45xampleEnum\x12\x07\n\x03\x46OO\x10\x00\x12\x07\n\x03\x42\x41R\x10\x01\x12\x08\n\x04\x42UZZ\x10\x02\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'test_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _EXAMPLEENUM._serialized_start=763
-  _EXAMPLEENUM._serialized_end=804
+  _EXAMPLEENUM._serialized_start=784
+  _EXAMPLEENUM._serialized_end=825
   _SIMPLETYPESMESSAGE._serialized_start=74
-  _SIMPLETYPESMESSAGE._serialized_end=289
-  _NESTEDMESSAGE._serialized_start=291
-  _NESTEDMESSAGE._serialized_end=334
-  _COMPLEXTYPESMESSAGE._serialized_start=337
-  _COMPLEXTYPESMESSAGE._serialized_end=761
+  _SIMPLETYPESMESSAGE._serialized_end=310
+  _NESTEDMESSAGE._serialized_start=312
+  _NESTEDMESSAGE._serialized_end=355
+  _COMPLEXTYPESMESSAGE._serialized_start=358
+  _COMPLEXTYPESMESSAGE._serialized_end=782
 # @@protoc_insertion_point(module_scope)

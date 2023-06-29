@@ -2,7 +2,6 @@
 
 Pydantic models generation from pb2
   - [x] Scalar fields
-    - [ ] bytes fields
   - [x] Enums
   - [x] Nested messages
   - [x] Repeated message fields

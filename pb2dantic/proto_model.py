@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 
 from pydantic import BaseModel
 from google.protobuf.message import Message
+from google.protobuf.descriptor import FieldDescriptor
 from google.protobuf.timestamp_pb2 import Timestamp
 from google.protobuf.json_format import MessageToDict
 
@@ -26,6 +27,13 @@ def _preprocess_data_pb2(data):
     return _preprocess_data_pb2_single(data)
 
 
+def _postprocess_pb2_dict(d: dict, msg: Message):
+    for fd, v in msg.ListFields():
+        if fd.type == FieldDescriptor.TYPE_BYTES:
+            d[fd.name] = v
+    return
+
+
 class ProtoModel(BaseModel):
     class Config:
         pb2_schema = Message
@@ -40,13 +48,13 @@ class ProtoModel(BaseModel):
 
     @classmethod
     def from_pb2(cls, msg: Message):
-        return cls.parse_obj(
-            MessageToDict(
-                msg,
-                preserving_proto_field_name=True,
-                use_integers_for_enums=True,
-            )
+        msg_dict = MessageToDict(
+            msg,
+            preserving_proto_field_name=True,
+            use_integers_for_enums=True,
         )
+        _postprocess_pb2_dict(msg_dict, msg)
+        return cls.parse_obj(msg_dict)
 
     @classmethod
     def deserialize(cls, data: bytes):
