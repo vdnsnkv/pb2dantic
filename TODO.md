@@ -25,13 +25,14 @@ Protobuf base model class
   - [x] Serialization
     - [x] Don't encode zero values for nested types
     - [x] datetime -> Timestamp serialization
+    - [x] bytes field serialization
     - [ ] Maps
     - [ ] Any
     - [ ] OneOf
     - [ ] Other Well-known types
   - [x] Deserialization
     - [x] Timestamp -> datetime deserialization
-    - [ ] bytes field deserialization
+    - [x] bytes field deserialization
     - [ ] Maps
     - [ ] Any
     - [ ] OneOf
